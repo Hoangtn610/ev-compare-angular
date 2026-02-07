@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-background py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl md:text-4xl font-bold mb-6">{{ lang.translate('search.title') }}</h1>
+
+        <!-- Search Bar -->
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6 border border-border">
+            <div class="flex gap-3">
+                <div class="flex-1 relative">
+                    <lucide-icon [img]="SearchIcon"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"></lucide-icon>
+                    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+                        [placeholder]="lang.translate('nav.searchPlaceholder')"
+                        class="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                </div>
+                <button (click)="showFilters = !showFilters"
+                    class="px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+                    [ngClass]="showFilters ? 'bg-primary text-white' : 'bg-secondary text-foreground hover:bg-secondary/80'">
+                    <lucide-icon [img]="SlidersHorizontal" class="w-5 h-5"></lucide-icon>
+                    <span class="hidden sm:inline">{{ lang.translate('search.filters') }}</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters Panel -->
+        <div *ngIf="showFilters" class="bg-white rounded-xl shadow-md p-6 mb-6 border border-border">
+            <div class="flex items-center justify-between mb-6">
+                <h3>{{ lang.translate('search.filters') }}</h3>
+                <button (click)="resetFilters()" class="text-sm text-primary hover:opacity-80 flex items-center gap-1">
+                    <lucide-icon [img]="X" class="w-4 h-4"></lucide-icon>
+                    {{ lang.translate('search.reset') }}
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Brand Filter -->
+                <div>
+                    <label class="block mb-2 text-sm font-medium">{{ lang.translate('search.brand') }}</label>
+                    <select [(ngModel)]="selectedBrand" (ngModelChange)="applyFilters()"
+                        class="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white">
+                        <option value="">{{ lang.translate('search.allBrands') }}</option>
+                        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+                    </select>
+                </div>
+
+                <!-- Price Range Filter -->
+                <div>
+                    <label class="block mb-2 text-sm font-medium">
+                        {{ lang.translate('search.priceRange') }}: {{ formatPrice(priceRange[0]) }} - {{
+                        formatPrice(priceRange[1]) }}
+                    </label>
+                    <div class="space-y-2">
+                        <input type="range" min="0" max="1500" step="50" [(ngModel)]="priceRange[0]"
+                            (ngModelChange)="applyFilters()" class="w-full accent-primary" />
+                        <input type="range" min="0" max="1500" step="50" [(ngModel)]="priceRange[1]"
+                            (ngModelChange)="applyFilters()" class="w-full accent-primary" />
+                    </div>
+                </div>
+
+                <!-- Range (km) Filter -->
+                <div>
+                    <label class="block mb-2 text-sm font-medium">
+                        {{ lang.translate('search.rangeKm') }}: {{ rangeKm[0] }} - {{ rangeKm[1] }} {{
+                        lang.translate('common.km') }}
+                    </label>
+                    <div class="space-y-2">
+                        <input type="range" min="0" max="100" step="5" [(ngModel)]="rangeKm[0]"
+                            (ngModelChange)="applyFilters()" class="w-full accent-primary" />
+                        <input type="range" min="0" max="100" step="5" [(ngModel)]="rangeKm[1]"
+                            (ngModelChange)="applyFilters()" class="w-full accent-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="mb-6">
+            <p class="text-muted-foreground">
+                {{ filteredVehicles.length }} {{ lang.translate('search.results') }}
+            </p>
+        </div>
+
+        <!-- Results Grid -->
+        <div *ngIf="filteredVehicles.length > 0; else noResults"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <app-vehicle-card *ngFor="let vehicle of filteredVehicles" [vehicle]="vehicle"></app-vehicle-card>
+        </div>
+
+        <ng-template #noResults>
+            <div class="bg-white rounded-xl shadow-md p-12 text-center border border-border">
+                <div class="max-w-md mx-auto">
+                    <div class="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                        <lucide-icon [img]="SearchIcon" class="w-8 h-8 text-muted-foreground"></lucide-icon>
+                    </div>
+                    <h3 class="mb-2">{{ lang.translate('search.noResults') }}</h3>
+                    <button (click)="resetFilters()" class="mt-4 text-primary hover:opacity-80">
+                        {{ lang.translate('search.reset') }}
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

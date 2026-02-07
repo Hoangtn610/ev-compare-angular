@@ -1,0 +1,162 @@
+<div class="min-h-screen bg-background py-8" *ngIf="vehicle; else notFound">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Back Button -->
+        <a routerLink="/"
+            class="flex items-center gap-2 text-primary hover:opacity-80 mb-6 transition-opacity cursor-pointer">
+            <lucide-icon [img]="ArrowLeft" class="w-5 h-5"></lucide-icon>
+            {{ lang.translate('detail.backToHome') }}
+        </a>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Left Column - Image -->
+            <div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-border">
+                    <img [src]="vehicle.image" [alt]="vehicle.brand + ' ' + vehicle.model"
+                        class="w-full h-96 object-cover" />
+                </div>
+
+                <!-- Available Colors -->
+                <div class="mt-6 bg-white rounded-xl shadow-md p-6 border border-border">
+                    <h3 class="mb-4">{{ lang.translate('detail.colors') }}</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div *ngFor="let color of vehicle.colors"
+                            class="px-4 py-2 border border-border rounded-lg hover:border-primary transition-colors cursor-pointer">
+                            {{ color }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Info -->
+            <div>
+                <div class="bg-white rounded-xl shadow-md p-6 border border-border">
+                    <!-- Header -->
+                    <div class="mb-6">
+                        <p class="text-muted-foreground mb-1">{{ vehicle.brand }}</p>
+                        <h1 class="text-3xl md:text-4xl font-bold mb-3">{{ vehicle.model }}</h1>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center gap-1">
+                                <lucide-icon [img]="Star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></lucide-icon>
+                                <span class="font-semibold">{{ vehicle.rating }}</span>
+                                <span class="text-muted-foreground">
+                                    ({{ vehicle.reviews.length }} {{ lang.language() === 'vi' ? 'đánh giá' : 'reviews'
+                                    }})
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline gap-2">
+                            <lucide-icon [img]="DollarSign" class="w-6 h-6 text-primary"></lucide-icon>
+                            <span class="text-3xl font-bold text-primary">
+                                {{ formatPrice(vehicle.price, vehicle.priceVND) }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Specs -->
+                    <div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-border">
+                        <div class="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+                            <lucide-icon [img]="Battery" class="w-5 h-5 text-primary"></lucide-icon>
+                            <div>
+                                <p class="text-xs text-muted-foreground">{{ lang.translate('card.range') }}</p>
+                                <p class="font-semibold">{{ vehicle.range }} {{ lang.translate('common.km') }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+                            <lucide-icon [img]="Zap" class="w-5 h-5 text-primary"></lucide-icon>
+                            <div>
+                                <p class="text-xs text-muted-foreground">{{ lang.translate('card.topSpeed') }}</p>
+                                <p class="font-semibold">{{ vehicle.topSpeed }} {{ lang.translate('common.kmh') }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+                            <lucide-icon [img]="Battery" class="w-5 h-5 text-primary"></lucide-icon>
+                            <div>
+                                <p class="text-xs text-muted-foreground">{{ lang.translate('compare.battery') }}</p>
+                                <p class="font-semibold">{{ vehicle.batteryCapacity }} kWh</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+                            <lucide-icon [img]="Clock" class="w-5 h-5 text-primary"></lucide-icon>
+                            <div>
+                                <p class="text-xs text-muted-foreground">{{ lang.translate('compare.charging') }}</p>
+                                <p class="font-semibold">{{ vehicle.chargingTime }} {{ lang.translate('common.hours') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="mb-6">
+                        <h3 class="mb-3">{{ lang.translate('compare.features') }}</h3>
+                        <div class="grid grid-cols-1 gap-2">
+                            <div *ngFor="let feature of vehicle.features" class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <span>{{ feature }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specifications -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-border">
+            <h2 class="mb-6">{{ lang.translate('detail.specs') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Battery" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('compare.battery') }}</p>
+                        <p class="font-semibold">{{ vehicle.batteryCapacity }} kWh</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Zap" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('compare.power') }}</p>
+                        <p class="font-semibold">{{ vehicle.power }} {{ lang.translate('common.kw') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Weight" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('compare.weight') }}</p>
+                        <p class="font-semibold">{{ vehicle.weight }} {{ lang.translate('common.kg') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Clock" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('compare.charging') }}</p>
+                        <p class="font-semibold">{{ vehicle.chargingTime }} {{ lang.translate('common.hours') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Shield" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('compare.warranty') }}</p>
+                        <p class="font-semibold">{{ vehicle.warranty }} {{ lang.translate('common.years') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 border border-border rounded-lg">
+                    <lucide-icon [img]="Zap" class="w-8 h-8 text-primary"></lucide-icon>
+                    <div>
+                        <p class="text-sm text-muted-foreground">{{ lang.translate('card.topSpeed') }}</p>
+                        <p class="font-semibold">{{ vehicle.topSpeed }} {{ lang.translate('common.kmh') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #notFound>
+    <div class="min-h-screen bg-background py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>Vehicle not found</p>
+            <a routerLink="/" class="text-primary hover:underline mt-4">
+                {{ lang.translate('detail.backToHome') }}
+            </a>
+        </div>
+    </div>
+</ng-template>

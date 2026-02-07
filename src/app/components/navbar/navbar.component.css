@@ -1,0 +1,7 @@
+@media (hover: hover) {
+  @supports (color: color-mix(in lab, red, red)) {
+    .hover\:text-foreground\/80:hover {
+      color: var(--primary) !important;
+    }
+  }
+}

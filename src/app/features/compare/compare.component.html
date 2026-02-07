@@ -1,0 +1,188 @@
+<div class="min-h-screen bg-background py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ lang.translate('compare.title') }}</h1>
+            <p class="text-muted-foreground">
+                {{ lang.language() === 'vi'
+                ? 'Chọn tối đa 4 xe để so sánh thông số kỹ thuật'
+                : 'Select up to 4 vehicles to compare specifications' }}
+            </p>
+        </div>
+
+        <!-- Selection Area -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-border">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block mb-2 text-sm">{{ lang.translate('compare.selectBrand') }}</label>
+                    <select [(ngModel)]="selectedBrand" (ngModelChange)="onBrandChange()"
+                        class="w-full px-4 py-2 border border-border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">{{ lang.translate('search.allBrands') }}</option>
+                        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block mb-2 text-sm">{{ lang.translate('compare.selectModel') }}</label>
+                    <select [(ngModel)]="selectedModel" [disabled]="!selectedBrand"
+                        class="w-full px-4 py-2 border border-border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed">
+                        <option value="">{{ lang.translate('compare.selectModel') }}</option>
+                        <option *ngFor="let vehicle of availableModels" [value]="vehicle.id">{{ vehicle.model }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="flex items-end">
+                    <button (click)="handleAddVehicle()" [disabled]="!selectedModel || selectedVehicles.length >= 4"
+                        class="w-full px-6 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                        <lucide-icon [img]="Plus" class="w-5 h-5"></lucide-icon>
+                        {{ lang.translate('compare.addVehicle') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div *ngIf="selectedVehicles.length > 0; else noVehicles"
+            class="bg-white rounded-xl shadow-md overflow-hidden border border-border">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-border bg-secondary/30">
+                            <th class="p-4 text-left font-semibold sticky left-0 bg-secondary/30 z-10 w-48">
+                                {{ lang.translate('compare.specs') }}
+                            </th>
+                            <th *ngFor="let vehicle of selectedVehicles" class="p-4 min-w-[250px]">
+                                <div class="relative">
+                                    <button (click)="handleRemoveVehicle(vehicle.id)"
+                                        class="absolute -top-2 -right-2 p-1 bg-destructive text-white rounded-full hover:opacity-90">
+                                        <lucide-icon [img]="X" class="w-4 h-4"></lucide-icon>
+                                    </button>
+                                    <img [src]="vehicle.image" [alt]="vehicle.brand + ' ' + vehicle.model"
+                                        class="w-full h-32 object-cover rounded-lg mb-3" />
+                                    <div class="text-sm text-muted-foreground">{{ vehicle.brand }}</div>
+                                    <div class="font-semibold text-lg">{{ vehicle.model }}</div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Price -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                {{ lang.translate('card.price') }}
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                <span class="text-primary font-bold">
+                                    {{ formatPrice(vehicle.price, vehicle.priceVND) }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- Rating -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                <div class="flex items-center gap-2">
+                                    <lucide-icon [img]="Star" class="w-4 h-4"></lucide-icon>
+                                    {{ lang.translate('detail.rating') }}
+                                </div>
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                <div class="flex items-center justify-center gap-1">
+                                    <lucide-icon [img]="Star"
+                                        class="w-4 h-4 fill-yellow-400 text-yellow-400"></lucide-icon>
+                                    <span>{{ vehicle.rating }}</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Range -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                <div class="flex items-center gap-2">
+                                    <lucide-icon [img]="Battery" class="w-4 h-4 text-primary"></lucide-icon>
+                                    {{ lang.translate('card.range') }}
+                                </div>
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                {{ vehicle.range }} {{ lang.translate('common.km') }}
+                            </td>
+                        </tr>
+
+                        <!-- Top Speed -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                <div class="flex items-center gap-2">
+                                    <lucide-icon [img]="Zap" class="w-4 h-4 text-primary"></lucide-icon>
+                                    {{ lang.translate('card.topSpeed') }}
+                                </div>
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                {{ vehicle.topSpeed }} {{ lang.translate('common.kmh') }}
+                            </td>
+                        </tr>
+
+                        <!-- Battery Capacity -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                <div class="flex items-center gap-2">
+                                    <lucide-icon [img]="Battery" class="w-4 h-4 text-primary"></lucide-icon>
+                                    {{ lang.translate('compare.battery') }}
+                                </div>
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                {{ vehicle.batteryCapacity }} kWh
+                            </td>
+                        </tr>
+
+                        <!-- Charging Time -->
+                        <tr class="border-b border-border hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                <div class="flex items-center gap-2">
+                                    <lucide-icon [img]="Clock" class="w-4 h-4 text-primary"></lucide-icon>
+                                    {{ lang.translate('compare.charging') }}
+                                </div>
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4 text-center">
+                                {{ vehicle.chargingTime }} {{ lang.translate('common.hours') }}
+                            </td>
+                        </tr>
+
+                        <!-- Features -->
+                        <tr class="hover:bg-secondary/20">
+                            <td class="p-4 font-medium sticky left-0 bg-white">
+                                {{ lang.translate('compare.features') }}
+                            </td>
+                            <td *ngFor="let vehicle of selectedVehicles" class="p-4">
+                                <ul class="text-sm space-y-1">
+                                    <li *ngFor="let feature of vehicle.features" class="flex items-center gap-2">
+                                        <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                                        {{ feature }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <ng-template #noVehicles>
+            <div class="bg-white rounded-xl shadow-md p-12 text-center border border-border">
+                <div class="max-w-md mx-auto">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <lucide-icon [img]="Plus" class="w-8 h-8 text-primary"></lucide-icon>
+                    </div>
+                    <h3 class="mb-2">
+                        {{ lang.language() === 'vi' ? 'Chưa có xe nào được chọn' : 'No vehicles selected' }}
+                    </h3>
+                    <p class="text-muted-foreground">
+                        {{ lang.language() === 'vi'
+                        ? 'Vui lòng chọn xe từ menu phía trên để bắt đầu so sánh'
+                        : 'Please select vehicles from the menu above to start comparing' }}
+                    </p>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
