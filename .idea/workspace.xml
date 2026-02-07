@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5c6654c9-574f-4205-bac4-71f1742b60dc" name="Changes" comment="init repo">
+      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.postcssrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/extensions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/mcp.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/angular-ev-compare.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/navbar/navbar.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/navbar/navbar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/navbar/navbar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/vehicle-card/vehicle-card.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/core/models/vehicle.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/core/services/language.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/core/services/vehicle.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/compare/compare.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/compare/compare.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/compare/compare.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/detail/detail.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/detail/detail.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/detail/detail.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/home/home.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/home/home.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/home/home.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/search/search.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/search/search.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/features/search/search.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.spec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master-bk" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Hoangtn610&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Hoangtn610/ev-compare-angular.git&quot;,
+    &quot;accountId&quot;: &quot;068bff19-e6ab-45b8-b319-727191db0653&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="39A6GBUSzhHNl0jiiX6uJIxFIph" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/EVCOMPARE/angular-ev-compare",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Angular CLI Server.executor": "Run",
+    "npm.build.executor": "Run",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\EVCOMPARE\\angular-ev-compare\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c6654c9-574f-4205-bac4-71f1742b60dc" name="Changes" comment="" />
+      <created>1770126429527</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770126429527</updated>
+      <workItem from="1770126430829" duration="3554000" />
+      <workItem from="1770301301334" duration="21000" />
+      <workItem from="1770428331772" duration="99000" />
+      <workItem from="1770429681807" duration="3572000" />
+      <workItem from="1770433327088" duration="21000" />
+      <workItem from="1770433442326" duration="1598000" />
+      <workItem from="1770435067916" duration="91000" />
+      <workItem from="1770435188837" duration="217000" />
+      <workItem from="1770435416400" duration="93000" />
+      <workItem from="1770435541342" duration="17000" />
+      <workItem from="1770437780063" duration="42000" />
+      <workItem from="1770437830508" duration="45000" />
+      <workItem from="1770437903267" duration="30000" />
+      <workItem from="1770437940983" duration="200000" />
+      <workItem from="1770438218560" duration="11000" />
+      <workItem from="1770438235252" duration="1188000" />
+      <workItem from="1770439478357" duration="806000" />
+      <workItem from="1770440299993" duration="409000" />
+    </task>
+    <task id="LOCAL-00001" summary="init repo">
+      <option name="closed" value="true" />
+      <created>1770433682033</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1770433682033</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init repo">
+      <option name="closed" value="true" />
+      <created>1770439249596</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1770439249596</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="init repo" />
+  </component>
+</project>
