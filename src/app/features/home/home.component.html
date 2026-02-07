@@ -1,0 +1,105 @@
+<div class="min-h-screen bg-background">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-primary/10 via-accent/10 to-background py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full mb-6">
+                    <lucide-icon [img]="Zap" class="w-5 h-5 text-primary"></lucide-icon>
+                    <span class="text-sm font-medium text-primary">100% {{ lang.language() === 'vi' ? 'Điện' :
+                        'Electric' }}</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+                    {{ lang.translate('hero.title') }}
+                </h1>
+                <p class="text-lg md:text-xl text-muted-foreground mb-8">
+                    {{ lang.translate('hero.subtitle') }}
+                </p>
+                <a routerLink="/compare"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity shadow-lg">
+                    {{ lang.translate('hero.cta') }}
+                    <lucide-icon [img]="ArrowRight" class="w-5 h-5"></lucide-icon>
+                </a>
+            </div>
+
+            <!-- Hero Image Grid -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="relative h-64 rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1737636255623-42843f3ea30b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpYyUyMHNjb290ZXIlMjBtb2Rlcm4lMjBncmVlbnxlbnwxfHx8fDE3Njk4Njk5MDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Electric Vehicle 1" class="w-full h-full object-cover" />
+                </div>
+                <div class="relative h-64 rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1767990495590-b8fde2270e02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpYyUyMG1vdG9yY3ljbGUlMjB2aWV0bmFtJTIwdXJiYW58ZW58MXx8fHwxNzY5ODY5OTA5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Electric Vehicle 2" class="w-full h-full object-cover" />
+                </div>
+                <div class="relative h-64 rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1669183013495-359f910e0c93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpYyUyMGJpa2UlMjBjaGFyZ2luZyUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzY5ODY5OTA5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Electric Vehicle 3" class="w-full h-full object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="py-12 border-b border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-center mb-8">{{ lang.translate('brands.title') }}</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a *ngFor="let brand of brands" [routerLink]="['/search']" [queryParams]="{ brand: brand }"
+                    class="px-6 py-3 bg-white border border-border rounded-lg hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md cursor-pointer decoration-0">
+                    {{ brand }}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Vehicles Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="mb-3">{{ lang.translate('featured.title') }}</h2>
+                <p class="text-muted-foreground">{{ lang.translate('featured.subtitle') }}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <app-vehicle-card *ngFor="let vehicle of featuredVehicles" [vehicle]="vehicle"></app-vehicle-card>
+            </div>
+
+            <div class="text-center">
+                <a routerLink="/search"
+                    class="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
+                    {{ lang.translate('featured.viewAll') }}
+                    <lucide-icon [img]="ArrowRight" class="w-4 h-4"></lucide-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary/50 border-t border-border py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="bg-primary rounded-lg p-2">
+                            <lucide-icon [img]="Zap" class="w-6 h-6 text-white"></lucide-icon>
+                        </div>
+                        <span class="text-xl font-bold">EVCompare</span>
+                    </div>
+                    <p class="text-muted-foreground">{{ lang.translate('footer.aboutText') }}</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">{{ lang.translate('footer.about') }}</h3>
+                    <p class="text-muted-foreground">{{ lang.translate('footer.aboutText') }}</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">{{ lang.translate('footer.contact') }}</h3>
+                    <p class="text-muted-foreground mb-2">{{ lang.translate('footer.email') }}</p>
+                    <p class="text-muted-foreground">{{ lang.translate('footer.phone') }}</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-border text-center text-muted-foreground">
+                <p>{{ lang.translate('footer.rights') }}</p>
+            </div>
+        </div>
+    </footer>
+</div>
