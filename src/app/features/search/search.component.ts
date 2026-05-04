@@ -34,17 +34,24 @@ export class SearchComponent implements OnInit {
 
   allVehicles: Vehicle[] = [];
   filteredVehicles: Vehicle[] = [];
+  private vehiclesLoaded = false;
 
   ngOnInit() {
-    this.allVehicles = this.vehicleService.getAllVehicles();
-    this.filteredVehicles = this.allVehicles;
+    this.vehicleService.getAllVehicles().subscribe(vehicles => {
+      this.allVehicles = vehicles;
+      this.filteredVehicles = vehicles;
+      this.vehiclesLoaded = true;
+      this.applyFilters();
+    });
 
     // Check query params for initial brand
     this.route.queryParams.subscribe(params => {
       if (params['brand']) {
         this.selectedBrand = params['brand'];
         this.showFilters = true;
-        this.applyFilters();
+        if (this.vehiclesLoaded) {
+          this.applyFilters();
+        }
       }
     });
   }

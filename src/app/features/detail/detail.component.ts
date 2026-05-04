@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, Battery, Zap, Weight, Clock, Shield, Star, DollarSign } from 'lucide-angular';
@@ -27,14 +27,19 @@ export class DetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private vehicleService = inject(VehicleService);
   public lang = inject(LanguageService);
+  private cdr = inject(ChangeDetectorRef);
 
   vehicle?: Vehicle;
 
   ngOnInit() {
+    console.log('Detail component initialized');
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.vehicle = this.vehicleService.getVehicleById(id);
+        this.vehicleService.getVehicleById(id).subscribe(vehicle => {
+          this.vehicle = vehicle;
+          this.cdr.markForCheck();
+        });
       }
     });
   }

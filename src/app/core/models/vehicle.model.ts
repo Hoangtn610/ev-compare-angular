@@ -1,22 +1,34 @@
 export interface Vehicle {
     id: string;
-    brand: string;
-    model: string;
-    price: number;
-    priceVND: number;
-    image: string;
+    brand: string; // => ok
+    model: string; // => OK
+    price: number; // => OK
+    priceVND: number; // => OK
+    image: string; // => OK
     range: number; // km
-    topSpeed: number; // km/h
-    batteryCapacity: number; // kWh
-    chargingTime: number; // hours
-    power: number; // kW
-    weight: number; // kg
-    warranty: number; // years
-    rating: number;
-    reviews: Review[];
-    features: string[];
-    colors: string[];
+    topSpeed: number; // km/h => OK
+    batteryCapacity: number; // kWh => OK
+    chargingTime: number; // hours => OK
+    power: number; // kW => OK
+    weight: number; // kg // => OK
+    warranty: number; // years // => OK
+    rating: number; // => OK
+    reviews: Review[]; // => OK
+    features: string[]; // => OK
+    colors: string[]; // => OK
+    length: number; // => OK
+    width: number;// => OK
+    height: number;// => OK
+    trunkCapacity: number; // => OK
 }
+
+// chargeType => OK
+// battery weight => OK
+// Range per charge => OK
+// length // => OK
+// width// => OK
+// height// => OK
+// trunk capacity => OK
 
 export interface Review {
     id: string;
