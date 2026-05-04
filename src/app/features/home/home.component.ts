@@ -6,6 +6,7 @@ import { VehicleService } from '../../core/services/vehicle.service';
 import { LanguageService } from '../../core/services/language.service';
 import { VehicleCardComponent } from '../../components/vehicle-card/vehicle-card.component';
 import { BRANDS } from '../../core/models/vehicle.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -22,5 +23,7 @@ export class HomeComponent {
   private vehicleService = inject(VehicleService);
   public lang = inject(LanguageService);
 
-  readonly featuredVehicles = this.vehicleService.getAllVehicles().slice(0, 6);
+  readonly featuredVehicles$ = this.vehicleService.getAllVehicles().pipe(
+    map(vehicles => vehicles.slice(0, 6))
+  );
 }

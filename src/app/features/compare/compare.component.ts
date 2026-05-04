@@ -38,10 +38,11 @@ export class CompareComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const vehicleId = params['vehicleId'];
       if (vehicleId) {
-        const vehicle = this.vehicleService.getVehicleById(vehicleId);
-        if (vehicle && !this.selectedVehicles.find(v => v.id === vehicle.id)) {
-          this.selectedVehicles.push(vehicle);
-        }
+        this.vehicleService.getVehicleById(vehicleId).subscribe(vehicle => {
+          if (vehicle && !this.selectedVehicles.find(v => v.id === vehicle.id)) {
+            this.selectedVehicles.push(vehicle);
+          }
+        });
       }
     });
   }
@@ -49,7 +50,9 @@ export class CompareComponent implements OnInit {
   onBrandChange() {
     this.selectedModel = '';
     if (this.selectedBrand) {
-      this.availableModels = this.vehicleService.getAllVehicles().filter(v => v.brand === this.selectedBrand);
+      this.vehicleService.getAllVehicles().subscribe(vehicles => {
+        this.availableModels = vehicles.filter(v => v.brand === this.selectedBrand);
+      });
     } else {
       this.availableModels = [];
     }
@@ -57,13 +60,14 @@ export class CompareComponent implements OnInit {
 
   handleAddVehicle() {
     if (this.selectedModel) {
-      const vehicle = this.vehicleService.getVehicleById(this.selectedModel);
-      if (vehicle && !this.selectedVehicles.find(v => v.id === vehicle.id) && this.selectedVehicles.length < 4) {
-        this.selectedVehicles.push(vehicle);
-        this.selectedBrand = '';
-        this.selectedModel = '';
-        this.availableModels = [];
-      }
+      this.vehicleService.getVehicleById(this.selectedModel).subscribe(vehicle => {
+        if (vehicle && !this.selectedVehicles.find(v => v.id === vehicle.id) && this.selectedVehicles.length < 4) {
+          this.selectedVehicles.push(vehicle);
+          this.selectedBrand = '';
+          this.selectedModel = '';
+          this.availableModels = [];
+        }
+      });
     }
   }
 
