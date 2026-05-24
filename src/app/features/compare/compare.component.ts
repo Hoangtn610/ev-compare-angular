@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule, X, Plus, Battery, Zap, Weight, Clock, Shield, Star } from 'lucide-angular';
 import { VehicleService } from '../../core/services/vehicle.service';
 import { LanguageService } from '../../core/services/language.service';
-import { Vehicle, BRANDS } from '../../core/models/vehicle.model';
+import { Vehicle } from '../../core/models/vehicle.model';
 
 @Component({
   selector: 'app-compare',
@@ -23,7 +23,6 @@ export class CompareComponent implements OnInit {
   readonly Clock = Clock;
   readonly Shield = Shield;
   readonly Star = Star;
-  readonly brands = BRANDS;
 
   private vehicleService = inject(VehicleService);
   private route = inject(ActivatedRoute);
@@ -33,8 +32,11 @@ export class CompareComponent implements OnInit {
   selectedBrand = '';
   selectedModel = '';
   availableModels: Vehicle[] = [];
+  brands: string[] = [];
 
   ngOnInit() {
+    this.loadBrands();
+
     this.route.queryParams.subscribe(params => {
       const vehicleId = params['vehicleId'];
       if (vehicleId) {
@@ -47,11 +49,17 @@ export class CompareComponent implements OnInit {
     });
   }
 
+  loadBrands() {
+    this.vehicleService.getAllBrandNames().subscribe(brands => {
+      this.brands = brands;
+    });
+  }
+
   onBrandChange() {
     this.selectedModel = '';
     if (this.selectedBrand) {
-      this.vehicleService.getAllVehicles().subscribe(vehicles => {
-        this.availableModels = vehicles.filter(v => v.brand === this.selectedBrand);
+      this.vehicleService.getAllVehiclesByBrand(this.selectedBrand).subscribe(vehicles => {
+        this.availableModels = vehicles ?? [];
       });
     } else {
       this.availableModels = [];

@@ -41,6 +41,8 @@ export class LanguageService {
             'common.hours': 'hours',
             'common.years': 'years',
             'common.kg': 'kg',
+            'common.page': 'Page',
+            'common.of': 'of',
 
             // Brands
             'brands.title': 'Browse by Brand',
@@ -120,7 +122,8 @@ export class LanguageService {
             'common.hours': 'giờ',
             'common.years': 'năm',
             'common.kg': 'kg',
-
+            'common.page': 'Trang',
+            'common.of': 'trên',
             // Brands
             'brands.title': 'Duyệt theo Thương Hiệu',
 
