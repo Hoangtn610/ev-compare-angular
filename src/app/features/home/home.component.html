@@ -44,7 +44,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-center mb-8">{{ lang.translate('brands.title') }}</h2>
             <div class="flex flex-wrap justify-center gap-4">
-                <a *ngFor="let brand of brands" [routerLink]="['/search']" [queryParams]="{ brand: brand }"
+                <a *ngFor="let brand of brands$ | async" [routerLink]="['/search']" [queryParams]="{ brand: brand }"
                     class="px-6 py-3 bg-white border border-border rounded-lg hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md cursor-pointer decoration-0">
                     {{ brand }}
                 </a>

@@ -40,11 +40,21 @@ export interface Review {
     commentVi?: string;
 }
 
-export const BRANDS = [
-    'VinFast',
-    'Yadea',
-    'Dibao',
-    'Pega',
-    'DK Bike',
-    'Osakar'
-];
+export interface VehicleFilters {
+    searchQuery?: string;
+    brand?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    minRange?: number;
+    maxRange?: number;
+    page?: number;
+    limit?: number;
+}
+
+export interface PageResult<T> {
+    content: T[];
+    page: number;
+    limit: number;
+    totalElements: number;
+    totalPages: number;
+}

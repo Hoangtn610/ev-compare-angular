@@ -8,10 +8,15 @@
                 <div class="flex-1 relative">
                     <lucide-icon [img]="SearchIcon"
                         class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"></lucide-icon>
-                    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+                    <input type="text" [(ngModel)]="searchQuery" (keyup)="onSearchKeyPress($event)"
                         [placeholder]="lang.translate('nav.searchPlaceholder')"
                         class="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
                 </div>
+                <button (click)="onSearch()"
+                    class="px-4 py-2 rounded-lg flex items-center gap-2 transition-colors bg-primary text-white hover:bg-primary/90">
+                    <lucide-icon [img]="SearchIcon" class="w-5 h-5"></lucide-icon>
+                    <span class="hidden sm:inline">{{ lang.translate('nav.search') || 'Search' }}</span>
+                </button>
                 <button (click)="showFilters = !showFilters"
                     class="px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
                     [ngClass]="showFilters ? 'bg-primary text-white' : 'bg-secondary text-foreground hover:bg-secondary/80'">
@@ -35,7 +40,7 @@
                 <!-- Brand Filter -->
                 <div>
                     <label class="block mb-2 text-sm font-medium">{{ lang.translate('search.brand') }}</label>
-                    <select [(ngModel)]="selectedBrand" (ngModelChange)="applyFilters()"
+                    <select [ngModel]="selectedBrand" (ngModelChange)="onBrandChange($event)"
                         class="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white">
                         <option value="">{{ lang.translate('search.allBrands') }}</option>
                         <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
@@ -75,18 +80,49 @@
         <!-- Results Count -->
         <div class="mb-6">
             <p class="text-muted-foreground">
-                {{ filteredVehicles.length }} {{ lang.translate('search.results') }}
+                {{ totalElements }} {{ lang.translate('search.results') }}
+                <span *ngIf="totalElements > 0">
+                    ({{ lang.translate('common.page') || 'Page' }} {{ currentPage }} {{ lang.translate('common.of') ||
+                    'of' }} {{ totalPages }})
+                </span>
             </p>
         </div>
 
         <!-- Results Grid -->
-        <div *ngIf="filteredVehicles.length > 0; else noResults"
+        <div *ngIf="isLoading" class="bg-white rounded-xl shadow-md p-12 text-center border border-border">
+            <p class="text-muted-foreground">{{ lang.translate('common.loading') || 'Loading...' }}</p>
+        </div>
+
+        <div *ngIf="!isLoading && paginatedVehicles.length > 0; else noResults"
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <app-vehicle-card *ngFor="let vehicle of filteredVehicles" [vehicle]="vehicle"></app-vehicle-card>
+            <app-vehicle-card *ngFor="let vehicle of paginatedVehicles" [vehicle]="vehicle"></app-vehicle-card>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div *ngIf="totalPages > 1" class="mt-10 flex items-center justify-center gap-2">
+            <button (click)="previousPage()" [disabled]="currentPage === 1"
+                class="px-4 py-2 rounded-lg border border-border transition-colors"
+                [ngClass]="currentPage === 1 ? 'opacity-50 cursor-not-allowed text-muted-foreground' : 'hover:bg-secondary text-foreground'">
+                {{ lang.translate('common.previous') || 'Previous' }}
+            </button>
+
+            <div class="flex gap-1">
+                <button *ngFor="let page of getPageNumbers()" (click)="goToPage(page)"
+                    class="px-3 py-2 rounded-lg border transition-colors"
+                    [ngClass]="page === currentPage ? 'bg-primary text-white border-primary' : 'border-border hover:bg-secondary text-foreground'">
+                    {{ page }}
+                </button>
+            </div>
+
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                class="px-4 py-2 rounded-lg border border-border transition-colors"
+                [ngClass]="currentPage === totalPages ? 'opacity-50 cursor-not-allowed text-muted-foreground' : 'hover:bg-secondary text-foreground'">
+                {{ lang.translate('common.next') || 'Next' }}
+            </button>
         </div>
 
         <ng-template #noResults>
-            <div class="bg-white rounded-xl shadow-md p-12 text-center border border-border">
+            <div *ngIf="!isLoading" class="bg-white rounded-xl shadow-md p-12 text-center border border-border">
                 <div class="max-w-md mx-auto">
                     <div class="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
                         <lucide-icon [img]="SearchIcon" class="w-8 h-8 text-muted-foreground"></lucide-icon>
