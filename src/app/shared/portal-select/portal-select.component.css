@@ -1,0 +1,38 @@
+.portal-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-card);
+}
+
+.portal-label {
+    flex: 1 1 auto;
+    text-align: left;
+}
+
+.portal-caret {
+    margin-left: 0.5rem;
+}
+
+.portal-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    max-height: 260px;
+    overflow: auto;
+    min-width: 12rem;
+}
+
+.portal-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.portal-option:hover {
+    background: rgba(0, 0, 0, 0.04);
+}

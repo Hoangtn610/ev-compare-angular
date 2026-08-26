@@ -1,0 +1,14 @@
+<div class="portal-select-root">
+    <button #trigger type="button" (click)="open()" class="portal-trigger" [attr.aria-disabled]="disabled">
+        <span class="portal-label">{{ displayLabel(selectedOption()) }}</span>
+        <span class="portal-caret">▾</span>
+    </button>
+
+    <ng-template #panel>
+        <div class="portal-panel" role="listbox">
+            <div *ngFor="let opt of options" class="portal-option" (click)="selectOption(opt)">
+                {{ optionLabel(opt) }}
+            </div>
+        </div>
+    </ng-template>
+</div>
