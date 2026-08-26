@@ -31,7 +31,9 @@ export class VehicleService {
     }
 
     getAllBrandNames(): Observable<string[]> {
-        return this.http.get<string[]>(`${this.apiUrl}/api/brands`);
+        return this.http.get<string[]>(`${this.apiUrl}/api/brands`).pipe(
+            catchError(() => of([]))
+        );
     }
 
     getFilteredVehicles(filters: VehicleFilters): Observable<PageResult<Vehicle>> {

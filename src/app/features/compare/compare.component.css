@@ -1,0 +1,12 @@
+/* Ensure the select dropdown can overflow the grid cell and sit above nearby elements */
+.compare-selection {
+	overflow: visible;
+}
+.compare-selection > .grid,
+.compare-selection > .grid > div {
+	overflow: visible;
+}
+.compare-selection .js-compare-select {
+	position: relative;
+	z-index: 9999;
+}

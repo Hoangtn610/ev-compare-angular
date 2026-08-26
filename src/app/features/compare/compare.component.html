@@ -10,25 +10,32 @@
         </div>
 
         <!-- Selection Area -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-8 border border-border">
+        <div
+            class="compare-selection relative z-90 bg-white rounded-xl shadow-md p-6 mb-8 border border-border overflow-visible">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label class="block mb-2 text-sm">{{ lang.translate('compare.selectBrand') }}</label>
-                    <select [(ngModel)]="selectedBrand" (ngModelChange)="onBrandChange()"
-                        class="w-full px-4 py-2 border border-border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        <option value="">{{ lang.translate('search.allBrands') }}</option>
-                        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-                    </select>
+                    <app-portal-select [(value)]="selectedBrand" (valueChange)="onBrandChange()" [options]="brands"
+                        class="js-compare-select w-full"></app-portal-select>
+                    <div class="mt-2 text-sm text-muted-foreground">
+                        <span *ngIf="brandsLoading">{{ lang.language() === 'vi' ? 'Đang tải thương hiệu...' : 'Loading
+                            brands...' }}</span>
+                        <span *ngIf="!brandsLoading && brandsLoadError">
+                            {{ lang.language() === 'vi' ? 'Không tải được danh sách thương hiệu.' : 'Failed to load
+                            brands.' }}
+                            <button (click)="retryLoadBrands()" class="ml-2 text-primary underline">{{ lang.language()
+                                === 'vi' ? 'Thử lại' : 'Retry' }}</button>
+                        </span>
+                        <span *ngIf="!brandsLoading && !brandsLoadError && brands.length === 0">
+                            {{ lang.language() === 'vi' ? 'Không tìm thấy thương hiệu.' : 'No brands available.' }}
+                        </span>
+                    </div>
                 </div>
 
                 <div>
                     <label class="block mb-2 text-sm">{{ lang.translate('compare.selectModel') }}</label>
-                    <select [(ngModel)]="selectedModel" [disabled]="!selectedBrand"
-                        class="w-full px-4 py-2 border border-border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed">
-                        <option value="">{{ lang.translate('compare.selectModel') }}</option>
-                        <option *ngFor="let vehicle of availableModels" [value]="vehicle.id">{{ vehicle.model }}
-                        </option>
-                    </select>
+                    <app-portal-select [(value)]="selectedModel" [disabled]="!selectedBrand" [options]="availableModels"
+                        [labelKey]="'model'" [valueKey]="'id'" class="js-compare-select w-full"></app-portal-select>
                 </div>
 
                 <div class="flex items-end">
@@ -43,7 +50,7 @@
 
         <!-- Comparison Table -->
         <div *ngIf="selectedVehicles.length > 0; else noVehicles"
-            class="bg-white rounded-xl shadow-md overflow-hidden border border-border">
+            class="relative z-10 bg-white rounded-xl shadow-md overflow-hidden border border-border">
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead>
