@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PageResult, Vehicle, VehicleFilters } from '../models/vehicle.model';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -10,7 +11,7 @@ import { PageResult, Vehicle, VehicleFilters } from '../models/vehicle.model';
     providedIn: 'root'
 })
 export class VehicleService {
-    private apiUrl = 'http://localhost:8080';
+    private apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
 
