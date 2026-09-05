@@ -19,7 +19,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: frontend-dist
-          path: dist/evcompare/**
+          path: dist/angular-ev-compare/**
           retention-days: 5
 
   deploy:
