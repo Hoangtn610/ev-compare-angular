@@ -19,7 +19,7 @@ export class LanguageService {
 
             // Hero
             'hero.title': 'Compare Electric Vehicles',
-            'hero.subtitle': 'Find the perfect electric scooter or motorcycle for your needs - CHECK CICD',
+            'hero.subtitle': 'Find the perfect electric scooter or motorcycle for your needs',
             'hero.cta': 'Compare Now',
 
             // Featured
